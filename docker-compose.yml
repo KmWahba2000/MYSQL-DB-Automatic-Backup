@@ -1,0 +1,49 @@
+services:
+  my-jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my-jenkins
+    restart: on-failure
+    networks:
+      - jenkins
+      - remote
+    volumes:
+      - /home/karim/jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+
+  db_host:
+    image: mysql:latest
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "1234"
+    volumes:
+      - /home/karim/db_data:/var/lib/mysql
+    networks:
+      - db
+
+  remote-server:
+    build:
+      context: ./remote_server
+      dockerfile: Dockerfile
+    container_name: remote_server
+    restart: unless-stopped
+    volumes:
+      - /home/karim/scripts/aws-s3.sh:/tmp/script.sh
+    networks:
+      - remote
+      - db
+    ports:
+      - "2222:22"
+
+networks:
+  jenkins:
+    external: true
+  db:
+    driver: bridge
+  remote:
+    driver: bridge
