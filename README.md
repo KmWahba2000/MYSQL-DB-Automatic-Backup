@@ -288,13 +288,15 @@ I also used the secret parameters defined earlier for the database password and 
 
 ![Alt text](assets/34.png)
 
+![Alt text](assets/35.png)
+
 When the job is built, Jenkins asks for the defined parameters, which makes it easy to reuse the job for another database or a different S3 bucket.
 
 ![Alt text](assets/36.png)
 
 The job runs successfully, and the console output confirms that the backup was uploaded to the S3 bucket:
 
-![Alt text](assets/35.png)
+![Alt text](assets/37.png)
 
 ![Alt text](assets/38.png)
 
