@@ -142,7 +142,7 @@ Inside the database, I added some data:
 ```mysql
 create database testdb;
 use testdb;
-create table info (FirstName varchar(20), LastName varchar(20), Age int(2));
+create table info (FirstName VARCHAR(20), LastName VARCHAR(20), Age INT);
 insert info values ('Karim','Wahba','25');
 select * from info;
 ```
